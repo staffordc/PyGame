@@ -53,7 +53,7 @@ escape_pod = Room("Escape Pod",
         Your instincts are telling you that you
         forgot something important. You can't remeber
         what though... what was it? Something about
-        a control or an emergency button...?
+        a control stick or an emergency button...?
         """
                   )
 
@@ -74,3 +74,45 @@ the_end_loser = Room("The End Lose",
         are standing outside of the pod. At least you know they'll be fried
         along with you.
         """)
+
+escape_pod.add_paths({
+    'control stick': the_end_winner,
+    'emergency button': the_end_loser
+})
+
+generic_death = Room("death", "You died.")
+
+the_bridge.add_paths({
+    'look down': generic_death,
+    'look up': escape_pod
+})
+
+laser_weapon_armory.add_paths({
+    '0132': the_bridge,
+    '*': generic_death
+})
+central_corridor.add_paths({
+    'jump': generic_death,
+    'run': generic_death,
+    'boot knife': laser_weapon_armory
+})
+START = 'central_corridor'
+
+
+def load_room(name):
+    """
+    There is a potential security problem here.
+    Who gets to set name? Can that expose a variable
+    """
+
+    return globals().get(name)
+
+
+def name_room(room):
+    """
+    Same possible security problem. Can you trust room?
+    What's a better solution tham thes globals lookup?
+    """
+    for key, value in globals().items():
+        if value == room:
+            return key
