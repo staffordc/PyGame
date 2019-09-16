@@ -50,3 +50,36 @@ def test_space_start_room3():
 
 
 def test_space_armory_room():
+    sec_room = load_room("laser_weapon_armory")
+    room = sec_room.go('012')
+    assert_equal(room, the_bridge)
+
+
+def test_space_armory_room_glob():
+    sec_room = load_room("laser_weapon_armory")
+    room = sec_room.go('*')
+    assert_equal(room, generic_death)
+
+
+def test_the_bridge():
+    thi_room = load_room("the_bridge")
+    room = thi_room.go('look down')
+    assert_equal(room, generic_death)
+
+
+def test_the_bridge1():
+    fou_room = load_room("the_bridge")
+    room = fou_room.go('look up')
+    assert_equal(room, escape_pod)
+
+
+def test_escape_pod():
+    fif_room = load_room("escape_pod")
+    room = fif_room.go('control stick')
+    assert_equal(room, the_end_winner)
+
+
+def test_escape_pod1():
+    fif_room = load_room("escape_pod")
+    room = fif_room.go('emergency button')
+    assert_equal(room, the_end_loser)

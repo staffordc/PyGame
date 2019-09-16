@@ -88,7 +88,7 @@ the_bridge.add_paths({
 })
 
 laser_weapon_armory.add_paths({
-    '0132': the_bridge,
+    '012': the_bridge,
     '*': generic_death
 })
 central_corridor.add_paths({
@@ -111,7 +111,7 @@ def load_room(name):
 def name_room(room):
     """
     Same possible security problem. Can you trust room?
-    What's a better solution tham thes globals lookup?
+    What's a better solution than the globals lookup?
     """
     for key, value in globals().items():
         if value == room:
