@@ -33,14 +33,14 @@ def test_map():
     assert_equal(start.go('down').go('up'), start)
 
 
-def test_space_start_room():
+def test_death_jump_corridor():
     start_room = load_room(START)
-    assert_equal(start_room.go('jump'), generic_death)
+    assert_equal(start_room.go('jump'), death_jump_corridor)
 
 
-def test_space_start_room2():
+def test_death_run_corridor():
     start_room = load_room(START)
-    assert_equal(start_room.go('run'), generic_death)
+    assert_equal(start_room.go('run'), death_run_corridor)
 
 
 def test_space_start_room3():
@@ -58,7 +58,7 @@ def test_space_armory_room():
 def test_space_armory_room_glob():
     sec_room = load_room("laser_weapon_armory")
     room = sec_room.go('*')
-    assert_equal(room, generic_death)
+    assert_equal(room, death_wrong_code_armory)
 
 
 def test_the_bridge():

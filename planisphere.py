@@ -75,6 +75,31 @@ the_end_loser = Room("The End Lose",
         along with you.
         """)
 
+death_jump_corridor = Room("You died",
+                           """
+                    You jump to try to get away from the tendrils.
+            Unfortunately that's what the... thing wanted,
+            and you can now feel them pulling you back
+            into the darkness. The remaining emergency
+            light illuminates enough for you to know
+            you can't escape. You still struggle.
+                    """)
+
+death_run_corridor = Room("You died", """
+        You cannot run fast enough. The tendrils wrap
+        around your legs, and tear at your suit. You pull
+        out your trusty combat knife and in a final act
+        of defiance you throw it at the thing. It doesn't
+        even flinch
+        """)
+
+death_wrong_code_armory = Room("You died", """
+        You feel it again. It is right behind you.
+        You have nothing to defend yourself with,
+        but you turn to it and try to make it as
+        unpleasant for the creature as possible.
+        """)
+
 escape_pod.add_paths({
     'control stick': the_end_winner,
     'emergency button': the_end_loser
@@ -89,30 +114,35 @@ the_bridge.add_paths({
 
 laser_weapon_armory.add_paths({
     '012': the_bridge,
-    '*': generic_death
+    '*': death_wrong_code_armory
 })
 central_corridor.add_paths({
-    'jump': generic_death,
-    'run': generic_death,
+    'jump': death_jump_corridor,
+    'run': death_run_corridor,
     'boot knife': laser_weapon_armory
 })
 START = 'central_corridor'
+the_map = {
+    "central_corridor": central_corridor,
+    "laser_weapon_armory": laser_weapon_armory,
+    "the_bridge": the_bridge,
+    "escape_pod": escape_pod,
+    "the_end_winner": the_end_winner,
+    "the_end_loser": the_end_loser,
+    "generic_death": generic_death,
+    "death_jump_corridor": death_jump_corridor,
+    "death_run_corridor": death_run_corridor,
+    "death_wrong_code_armory": death_wrong_code_armory
+}
 
 
 def load_room(name):
-    """
-    There is a potential security problem here.
-    Who gets to set name? Can that expose a variable
-    """
 
-    return globals().get(name)
+    return the_map[name]
 
 
 def name_room(room):
-    """
-    Same possible security problem. Can you trust room?
-    What's a better solution than the globals lookup?
-    """
-    for key, value in globals().items():
+
+    for key, value in the_map.items():
         if value == room:
             return key
