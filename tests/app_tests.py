@@ -48,3 +48,11 @@ def test_session_next3():
     rv = web.post('/game', data='action=boot knife',
                   content_type='application/x-www-form-urlencoded', follow_redirects=True)
     assert_in(b"it is locked with a 3", rv.data)
+
+
+def test_session_next4():
+    with web.session_transaction() as sess:
+        sess['room_name'] = 'central_corridor'
+    rv = web.post('/game', data='action=jump',
+                  content_type='application/x-www-form-urlencoded', follow_redirects=True)
+    assert_in(b"them pulling you", rv.data)

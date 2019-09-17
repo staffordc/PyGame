@@ -77,13 +77,13 @@ the_end_loser = Room("The End Lose",
 
 death_jump_corridor = Room("You died",
                            """
-                    You jump to try to get away from the tendrils.
-            Unfortunately that's what the... thing wanted,
-            and you can now feel them pulling you back
-            into the darkness. The remaining emergency
-            light illuminates enough for you to know
-            you can't escape. You still struggle.
-                    """)
+    You jump to try to get away from the tendrils.
+    Unfortunately that's what the... thing wanted,
+    and you can now feel them pulling you back
+    into the darkness. The remaining emergency
+    light illuminates enough for you to know
+    you can't escape. You still struggle.
+            """)
 
 death_run_corridor = Room("You died", """
         You cannot run fast enough. The tendrils wrap
@@ -100,6 +100,15 @@ death_wrong_code_armory = Room("You died", """
         unpleasant for the creature as possible.
         """)
 
+death_look_down_bridge = Room("You died", """
+        You see the screaming maw of space,
+        expanding ever farther than beyond your
+        imagination. It draws you in, you drop 
+        the bomb and float away. The ship explodes
+        and you float in the vastness of the universe
+        waiting for your death by asphyxiation""")
+
+
 escape_pod.add_paths({
     'control stick': the_end_winner,
     'emergency button': the_end_loser
@@ -108,7 +117,7 @@ escape_pod.add_paths({
 generic_death = Room("death", "You died.")
 
 the_bridge.add_paths({
-    'look down': generic_death,
+    'look down': death_look_down_bridge,
     'look up': escape_pod
 })
 
@@ -132,7 +141,8 @@ the_map = {
     "generic_death": generic_death,
     "death_jump_corridor": death_jump_corridor,
     "death_run_corridor": death_run_corridor,
-    "death_wrong_code_armory": death_wrong_code_armory
+    "death_wrong_code_armory": death_wrong_code_armory,
+    "death_look_down_bridge": death_look_down_bridge
 }
 
 

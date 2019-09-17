@@ -22,7 +22,6 @@ def game():
             room = planisphere.load_room(room_name)
             return render_template("show_room.html", room=room)
         else:
-            # Why is this here? Do you need it?
             return render_template("you_died.html")
     else:
         action = request.form.get('action')

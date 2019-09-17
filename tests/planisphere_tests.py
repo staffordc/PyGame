@@ -64,7 +64,7 @@ def test_space_armory_room_glob():
 def test_the_bridge():
     thi_room = load_room("the_bridge")
     room = thi_room.go('look down')
-    assert_equal(room, generic_death)
+    assert_equal(room, death_look_down_bridge)
 
 
 def test_the_bridge1():
